@@ -37,6 +37,34 @@ La regla principal de diseño es innegociable: **el motor de reglas decide, el b
 | [testing.md](testing.md) | Plan de pruebas (unitarias, integración, E2E) y criterios de aceptación |
 | [implementation-checklist.md](implementation-checklist.md) | Checklist día a día: entregable, responsable, dependencias, criterio de aceptación, prueba, riesgos |
 | [demo-script.md](demo-script.md) | Guion cronometrado de la demo del hackathon y plan de contingencia |
+| [development-plan.md](development-plan.md) | Vista ejecutiva del plan de 15 días por bloques, con enlaces al plan individual de cada developer |
+| [integration-and-dependencies.md](integration-and-dependencies.md) | Cómo colaboran los cuatro developers, qué contratos comparten y qué necesitan entre sí |
+| [definition-of-done.md](definition-of-done.md) | Checklist operativa para considerar terminada una tarea o un hito de bloque |
+
+## Espacio de trabajo de cada developer
+
+Cada developer tiene su propia carpeta en `developers/` con su plan completo de 15 días, bitácora diaria, notas técnicas y bloqueos:
+
+| Developer | Responsabilidad | Carpeta |
+|---|---|---|
+| Developer 1 | Backend, motor de reglas, base de datos y DevOps | [developers/developer-1/](developers/developer-1/README.md) |
+| Developer 2 | Frontend y UX | [developers/developer-2/](developers/developer-2/README.md) |
+| Developer 3 | Agente de IA y Nebius | [developers/developer-3/](developers/developer-3/README.md) |
+| Developer 4 | Contratos, mocks, pruebas e integración | [developers/developer-4/](developers/developer-4/README.md) |
+
+Estos nombres (`Developer 1` a `Developer 4`) se usan hasta que se conozcan los usuarios reales de GitHub de cada integrante.
+
+## Reglas de actualización y colaboración
+
+1. Cada developer actualiza su bitácora (`daily-log.md`) al terminar su jornada.
+2. Las notas (`notes.md`) deben incluir contexto suficiente para que otro integrante las entienda.
+3. Los bloqueos importantes deben registrarse en `blockers.md` y comunicarse al equipo.
+4. Las decisiones que afecten a la arquitectura o a varios módulos también deben reflejarse en la documentación general (este README, `development-plan.md`, `integration-and-dependencies.md`, o el documento técnico correspondiente).
+5. No se considera completada una tarea solo porque esté anotada como terminada: debe existir evidencia verificable (ver [definition-of-done.md](definition-of-done.md)).
+6. Los archivos individuales pueden modificarse mediante Pull Requests pequeños.
+7. Los documentos generales son compartidos y no deben contradecir los contratos técnicos existentes.
+
+Los archivos Markdown de este repositorio son compartidos: los cuatro integrantes pueden proponer cambios si tienen permisos de escritura en GitHub. Las carpetas de `developers/` organizan el trabajo, no establecen permisos privados.
 
 ## Otros repositorios de FlowGuard-Hackathon
 
