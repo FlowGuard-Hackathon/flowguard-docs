@@ -6,10 +6,10 @@ Este plan es la vista diaria del rol de Developer 3 dentro de [development-plan.
 
 | Día | Objetivo | Tareas | Entregable | Dependencias | Criterio de aceptación | Estado |
 |---|---|---|---|---|---|---|
-| 1 | Contrato del informe del agente | Participar en la definición del contrato del informe junto con Dev 4 | Contrato acordado en [api-contracts.md § 10](../../api-contracts.md#10-contrato-del-informe-del-agente) | Contratos congelados (día 1) | El contrato cubre los campos que necesita el adaptador | Pendiente |
-| 2 | Adaptador de Nebius con mock | Construir el adaptador (`src/server/agent/`) con una respuesta mock intercambiable por variable de entorno | Adaptador funcional en modo mock | Contrato del informe (día 1) | El adaptador produce un informe válido contra el esquema, usando el mock | Pendiente |
-| 3 | Validación del adaptador | Prueba unitaria que valida el mock contra el esquema Zod; coordinar con Dev 4 la fixture `investigation-failed.json` | Prueba unitaria pasando; fixture de fallo publicada | Adaptador con mock (día 2) | La prueba unitaria confirma que el mock cumple el esquema | Pendiente |
-| 4 | Herramientas de lectura (esqueleto) | Implementar `get_execution`, `get_rule_results`, `get_evidence`, `get_payment_context`, `get_rule_details` contra datos mock | Herramientas funcionando contra mock | Contrato del informe | Cada herramienta devuelve datos consistentes con el mock | Pendiente |
+| 1 | Contrato del informe del agente | Participar en la definición del contrato del informe junto con Dev 4 | Contrato acordado en [api-contracts.md § 10](../../api-contracts.md#10-contrato-del-informe-del-agente) y reflejado en `src/contracts/evidence-report.schema.ts` | Contratos congelados (día 1) | El contrato cubre los campos que necesita el adaptador | Completado |
+| 2 | Adaptador de Nebius con mock | Construir el adaptador (`src/server/agent/`) con una respuesta mock intercambiable por variable de entorno | Adaptador funcional en modo mock (`MockAgentProvider`, selección por `AGENT_PROVIDER`) | Contrato del informe (día 1) | El adaptador produce un informe válido contra el esquema, usando el mock | Completado |
+| 3 | Validación del adaptador | Prueba unitaria que valida el mock contra el esquema Zod; coordinar con Dev 4 la fixture `investigation-failed.json` | Prueba unitaria pasando (`mockProvider.test.ts`, 2/2) | Adaptador con mock (día 2) | La prueba unitaria confirma que el mock cumple el esquema | En progreso* |
+| 4 | Herramientas de lectura (esqueleto) | Implementar `get_execution`, `get_rule_results`, `get_evidence`, `get_payment_context`, `get_rule_details` contra datos mock | Firmas creadas en `src/server/tools/` (lanzan `NotImplementedError` hasta tener datos mock o reales) | Contrato del informe | Cada herramienta devuelve datos consistentes con el mock | Pendiente |
 | 5 | Herramientas contra datos reales | Conectar las herramientas de lectura a la base real una vez disponible `POST /executions` | Herramientas devolviendo datos reales | Migración aplicada, `POST /executions` (Dev 1) | Cada herramienta devuelve datos reales de una ejecución de prueba | Pendiente |
 | 6 | Pruebas unitarias por herramienta y hito del bloque 2 | Completar prueba unitaria por cada herramienta; participar en el ensayo del hito obligatorio | Suite de pruebas por herramienta; hito del día 6 demostrado | Herramientas contra datos reales (día 5) | Demo interna reproduce el hito sin errores, con IA en modo mock | Pendiente |
 | 7 | Checklist de compatibilidad con Nebius | Completar y documentar la checklist de [security.md § 1.8](../../security.md#18-lista-de-verificación-de-compatibilidad-con-nebius) | Checklist completada con respuestas confirmadas, no supuestos | Acceso a documentación oficial y credenciales del hackathon | Cada punto de la lista tiene una respuesta confirmada; revisión cruzada de Dev 4 | Pendiente |
@@ -21,6 +21,12 @@ Este plan es la vista diaria del rol de Developer 3 dentro de [development-plan.
 | 13 | Congelación de funcionalidades | Solo correcciones de bugs o documentación a partir de este día | PRs únicamente de corrección | Hito del día 12 | Ningún PR posterior agrega funcionalidad nueva | Pendiente |
 | 14 | Verificación final del modelo | Verificar el comportamiento ante errores de Nebius para la demo; ensayar el escenario de fallo | Plan de contingencia ejecutable | Congelación de funcionalidades | El plan de [demo-script.md § 3](../../demo-script.md#3-plan-de-contingencia-de-la-demo) se ejecuta sin improvisar | Pendiente |
 | 15 | Entrega final | Apoyar el ensayo cronometrado de la demo | Agente estable para la demo | Todo lo anterior | Checklist de [implementation-checklist.md](../../implementation-checklist.md) completa para las filas de Developer 3 | Pendiente |
+
+\* Día 3: la prueba unitaria del mock ya pasa; falta que Dev 4 publique la fixture `investigation-failed.json` en `flowguard-mocks` para cerrar el día por completo.
+
+## Progreso registrado
+
+- 2026-10-16 — Días 1 a 3 avanzados: esqueleto del agente inicializado en [flowguard-src PR #1](https://github.com/FlowGuard-Hackathon/flowguard-src/pull/1) (fusionado a `main`). Detalle día a día en [daily-log.md](daily-log.md); decisiones técnicas en [notes.md](notes.md).
 
 ## Referencias
 
