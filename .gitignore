@@ -1,0 +1,8 @@
+# Este repo es solo documental, pero por si alguien pega un .env o una
+# credencial de prueba junto a sus notas, nunca debe subirse.
+.env
+.env*.local
+
+# Editor / OS
+.DS_Store
+Thumbs.db
