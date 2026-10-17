@@ -45,6 +45,7 @@ La regla principal de diseño es innegociable: **el motor de reglas decide, el b
 | [plan-desarrollo.md](plan-desarrollo.md) | Vista ejecutiva del plan de 15 días por bloques, con enlaces al plan individual de cada desarrollador |
 | [integracion-y-dependencias.md](integracion-y-dependencias.md) | Cómo colaboran los cinco puestos, qué contratos comparten y qué necesitan entre sí |
 | [definicion-de-terminado.md](definicion-de-terminado.md) | Checklist operativa para considerar terminada una tarea o un hito de bloque |
+| [requisitos-vistas.md](requisitos-vistas.md) | Requisitos de UI de las 9 vistas del frontend; qué está dentro del MVP y qué queda propuesto para una fase posterior |
 
 ## Distribución del equipo (cinco puestos)
 
