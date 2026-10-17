@@ -135,6 +135,12 @@ Copia la plantilla de abajo para cada día de trabajo. No se rellenan avances in
 ### Próximo objetivo
 - Publicar las herramientas ya en español y seguir con el día 5 cuando exista persistencia.
 
+### Actualización (mismo día, cierre)
+- Las herramientas se adaptaron al glosario y se fusionaron en `flowguard-src` #5 (dos commits: `refactor(src)!` y `feat(herramientas)`). Estado del día 4: **Completado**. `npm test` 19/19 y `typecheck` sin errores tras el renombrado.
+- `flowguard-docs` #9: documentación renombrada al español.
+- Pasos 3, 5 y 6 del glosario preparados: migración SQL de `flowguard-supabase` en español (marcada como pendiente de verificar en Supabase), rutas en español en `flowguard-app` (`typecheck`, `build` y `/panel`, `/simulador`, `/evidencias` respondiendo 200) y READMEs de `flowguard-mocks`, `flowguard-tests` y `flowguard`.
+- Decisión de coordinación: no se agregan tecnologías fuera del stack (por ejemplo Docker) porque el resto del equipo tiene poca experiencia.
+
 ### Dependencias de otros developers
 -
 

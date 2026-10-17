@@ -2,6 +2,8 @@
 
 ## 0. Qué se ejecutó realmente y qué queda solo especificado
 
+> **Aviso (2026-10-17):** la migración se renombró al español según el [glosario](glosario.md) y **no se ha vuelto a ejecutar**. Las verificaciones descritas aquí se hicieron con los nombres anteriores en inglés, así que la versión actual queda **pendiente de verificar** al aplicarla en el proyecto Supabase de desarrollo (Dev 1). No se usa Docker ni otra herramienta fuera del stack documentado. La tabla de esta sección es el registro de lo que se comprobó con la versión anterior.
+
 Este documento es, en su mayoría, una **especificación** de pruebas para que el equipo las implemente con Vitest/Playwright — no hay código de aplicación en este repositorio que las ejecute. La única excepción son las garantías a nivel de base de datos del mecanismo asíncrono y del *rate limiting*, que sí se **ejecutaron de verdad** contra un PostgreSQL 16 real en un contenedor Docker desechable, durante la tercera auditoría de esta especificación (ver la nota de verificación al inicio de [base-datos.md](base-datos.md) y el comentario en la cabecera de `supabase/migrations/001_esquema_inicial.sql`). Concretamente, se ejecutaron con datos reales y se confirmó el resultado indicado:
 
 | Escenario | Resultado confirmado con datos reales |
