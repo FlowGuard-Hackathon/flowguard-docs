@@ -18,6 +18,24 @@ Este documento es, en su mayoría, una **especificación** de pruebas para que e
 
 Todo lo demás en este documento — motor de reglas, herramientas del agente, endpoints HTTP, frontend, RLS end-to-end, Basic Auth de la demo — está **especificado** aquí con el detalle suficiente para implementarse, pero no se ha ejecutado, porque requiere el código de aplicación que todavía no existe en este repositorio documental.
 
+## Responsables de las pruebas
+
+Esta tabla indica **quién mantiene cada tipo de prueba** con la distribución de cinco puestos. Es una asignación de responsabilidad, no evidencia de ejecución: salvo las pruebas marcadas como ejecutadas en la sección 0, todo lo especificado en este documento sigue siendo *planificado*. `flowguard-tests` solo contiene hoy un README y un `.gitignore`: **todavía no existe una suite funcional**.
+
+| Tipo de prueba o trabajo | Responsable |
+|---|---|
+| Motor de reglas, persistencia e integración del backend | Puesto 1 (Dev 1) |
+| Interfaz, formularios y flujos E2E de usuario | Puesto 2 (Dev 2) |
+| Agente, proveedor, respuestas estructuradas y fallos de IA | Puesto 3 (Dev 3) |
+| Contratos compartidos, fixtures y compatibilidad transversal | Puesto 5 (Dev 5) |
+| Coordinación de la suite compartida `flowguard-tests` | Puesto 5 (Dev 5) |
+| Automatización de la ejecución de las pruebas existentes (CI) | Puesto 4 (Dev 4) |
+| Regresión completa entre módulos | Responsabilidad conjunta de los propietarios de los módulos; coordinación del puesto 5 |
+| Integración y pruebas que atraviesan varios módulos | Responsabilidad compartida de los propietarios involucrados; coordinación del puesto 5 |
+| Registro de defectos transversales | Puesto 5, con corrección por el propietario técnico del módulo afectado |
+
+El puesto 5 coordina la suite transversal y mantiene los contratos y fixtures, pero **no** implementa todas las pruebas de todos los módulos: los propietarios técnicos siguen siendo responsables de las pruebas funcionales de los suyos. El puesto 4 no es responsable funcional de QA: automatiza la ejecución y comunica los fallos del pipeline, y el propietario corrige los defectos funcionales. Los hitos de los días 6, 9, 12 y 15 se verifican de forma cruzada (ver [definition-of-done.md](definition-of-done.md#criterios-por-hito-de-bloque)).
+
 ## 1. Pruebas unitarias
 
 ### Motor de reglas
@@ -124,6 +142,7 @@ Cada prueba indica el estado inicial relevante de `idempotency_keys`/`executions
 - Con `DEMO_BASIC_AUTH_USER`/`DEMO_BASIC_AUTH_PASSWORD` configurados (ver [security.md § 2.0](security.md#20-estrategia-de-seguridad-por-entorno)), una solicitud a cualquier ruta (incluidas `/api/v1/rules` y `/api/v1/health`) sin credenciales válidas debe ser rechazada por el middleware antes de llegar al route handler.
 - Verificar que las credenciales de Basic Auth nunca aparecen en el HTML ni en los bundles de JavaScript servidos al navegador (inspección del build de producción).
 - Verificar que `429 RATE_LIMITED` se activa ante un volumen de solicitudes anómalo durante la ventana de la demo, incluso con credenciales válidas.
+- Responsables: Dev 1 (middleware y credenciales) y Dev 2 (verifica el acceso desde la interfaz); el funcionamiento del acceso se comprueba durante el ensayo de la demo. Las credenciales nunca se almacenan en Git ni se imprimen en logs.
 
 ### Coherencia entre base de datos y contratos
 
