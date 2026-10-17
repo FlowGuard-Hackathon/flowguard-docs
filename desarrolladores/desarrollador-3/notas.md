@@ -32,7 +32,7 @@ Notas personales de trabajo. Cada nota debe incluir fecha, contexto y estado, pa
 - Contexto: el día 4 pide las herramientas contra datos mock, pero Dev 1 todavía no existe como persona ni hay persistencia. Hacía falta avanzar sin inventar la persistencia y sin que Dev 1 tenga que reescribir el módulo después.
 - Decisión tomada: las herramientas reciben un `FuenteDatosHerramientas` (interfaz de solo lectura con 5 métodos). Hoy se usa `FuenteDatosEnMemoria` con datos simulados; Dev 1 implementa la versión real en `src/servidor/persistencia/` y basta con pasarla a `crearHerramientasLectura`. Contrato: si no existe → `null`; si hay una falla real → `throw`, que la herramienta convierte en `DEPENDENCIA_NO_DISPONIBLE` sin filtrar detalles. Parámetros con Zod `.strict()` para rechazar parámetros de más que mande el modelo. Solo códigos del catálogo cerrado.
 - Alternativas consideradas: (a) mantener los stubs: no cumplía el día 4; (b) que las herramientas consulten Supabase directo: rompe la propiedad por rutas (la persistencia es de Dev 1) y obliga a credenciales para probar.
-- Estado: Implementada en rama local; pendiente de PR.
+- Estado: Fusionada en [flowguard-src PR #5](https://github.com/FlowGuard-Hackathon/flowguard-src/pull/5).
 
 ### [2026-10-17] Identificadores del sistema en español
 
@@ -40,6 +40,13 @@ Notas personales de trabajo. Cada nota debe incluir fecha, contexto y estado, pa
 - Decisión tomada: todo pasa al español (API, BD, errores, variables de entorno, código y documentos) según [glosario.md](../../glosario.md). Los textos visibles van en catálogos de mensajes (`src/mensajes/es.ts`) para poder agregar idiomas sin tocar la lógica. Las bitácoras no se traducen porque son registro histórico.
 - Alternativas consideradas: mantener los contratos en inglés y solo traducir mensajes; descartada por decisión de coordinación.
 - Estado: Aprobada; migración en curso (docs hechos, faltan supabase, src, app y el resto).
+
+### [2026-10-17] Sin tecnologías fuera del stack
+
+- Contexto: para repetir la verificación de la migración SQL renombrada se propuso usar Docker.
+- Decisión tomada: no se agregan herramientas ni tecnologías fuera del stack documentado mientras el equipo gana experiencia. La migración se verificará al aplicarla en el proyecto Supabase de desarrollo (Dev 1) y hasta entonces queda marcada como pendiente de verificar.
+- Alternativas consideradas: Docker con PostgreSQL desechable (descartada por la curva de aprendizaje del equipo).
+- Estado: Aprobada.
 
 ### [2026-10-17] Convenciones de commits, ramas y comentarios
 
@@ -106,9 +113,9 @@ comando aquí
 ```
 npm test
 npm run typecheck
-npx vitest run src/server/tools/tools.test.ts
+npx vitest run src/servidor/herramientas/herramientas.test.ts
 ```
-- Contexto: las dos primeras deben pasar siempre antes de abrir un PR. La tercera corre una sola suite (ruta anterior al renombrado de `flowguard-src`; cambia a `src/servidor/herramientas/herramientas.test.ts` en el paso 4 del glosario).
+- Contexto: las dos primeras deben pasar siempre antes de abrir un PR. La tercera corre solo la suite de las herramientas.
 
 ### [2026-10-17] Comprobar la identidad antes del primer push en un clon nuevo
 

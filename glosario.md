@@ -14,7 +14,7 @@ Convenciones relacionadas: [convencion-commits.md](convencion-commits.md) y [con
 | Motivo | Equipo hispanohablante; se decide antes de que exista código del backend o de la base de datos, cuando el costo del cambio es mínimo |
 | Contexto | Hasta esta fecha los contratos estaban congelados en inglés. Este cambio reemplaza esos nombres; **no** cambia la arquitectura, el stack, las reglas de negocio, el modelo de datos ni el comportamiento de ningún componente: solo los nombres |
 | Escalabilidad | Los textos visibles (mensajes al usuario y al modelo) se centralizan en catálogos de mensajes con claves estables (`mensajes/es.ts`); agregar otro idioma consiste en añadir otro catálogo, sin tocar la lógica |
-| Estado | **Migración en curso.** `flowguard-docs` ya está migrado (paso 2). El resto de repositorios se renombra en el orden de la sección final; hasta entonces su código y sus READMEs pueden seguir con nombres en inglés |
+| Estado | **Migración completada en los siete repositorios** (pasos 1 a 6). Pendiente únicamente: verificar la migración SQL renombrada al aplicarla en el proyecto Supabase de desarrollo |
 
 ## Reglas de nomenclatura
 
@@ -362,6 +362,9 @@ Se conservan como términos técnicos o prefijos de integración (`git subtree`)
 | `UNKNOWN` | `DESCONOCIDO` |
 | `CONFIGURED_MODEL` | `MODELO_CONFIGURADO` |
 | `current_count` | `conteo_actual` |
+| Restricción `fk_idempotency_keys_execution` | `fk_claves_idempotencia_ejecucion` |
+| Prefijo de código de intento generado por SQL `INV-ATT-` | `INT-` (queda `INT-0001-xxxxxxxx`) |
+| Componentes de página `HomePage`, `DashboardPage`, `SimulatorPage`, `EvidencePage`, `RootLayout` | `PaginaInicio`, `PaginaPanel`, `PaginaSimulador`, `PaginaEvidencias`, `LayoutRaiz` |
 | `RuleResult` | `ResultadoRegla` |
 | Índices `idx_<tabla>_<columnas>` | Mismo formato con los nombres nuevos, p. ej. `idx_ejecuciones_estado_investigacion` |
 | Variables TS de las reglas (`amountMinor`, `approvalThresholdMinor`, `validSupervisorApproval`, `allowedCategories`, `requesterId`, `approverId`…) | `montoCentavos`, `umbralAprobacionCentavos`, `aprobacionSupervisorValida`, `categoriasPermitidas`, `solicitanteId`, `aprobadorId`… |
@@ -376,7 +379,7 @@ Cada paso es un PR independiente con commits `refactor(...)!` o `docs(...)!` seg
 
 1. `flowguard-docs`: este glosario y las convenciones (este PR).
 2. `flowguard-docs`: renombrado de documentos y de todos los identificadores dentro de ellos. Las bitácoras (`bitacora.md`) **no** se traducen: son el registro histórico de lo que se hizo con los nombres de ese momento.
-3. `flowguard-supabase`: migración SQL con tablas, columnas, funciones y valores en español. **La verificación previa contra PostgreSQL real deja de aplicar** y debe repetirse antes de volver a marcarla como verificada.
+3. `flowguard-supabase`: migración SQL con tablas, columnas, funciones y valores en español. **La verificación previa contra PostgreSQL real deja de aplicar** y se repetirá en el proyecto Supabase de desarrollo, sin Docker ni herramientas fuera del stack, antes de volver a marcarla como verificada.
 4. `flowguard-src`: carpetas, contratos Zod, agente, herramientas y catálogo `src/mensajes/es.ts`.
 5. `flowguard-app`: rutas de páginas y de la API.
 6. `flowguard-mocks`, `flowguard-tests` y `flowguard`: READMEs y referencias.
