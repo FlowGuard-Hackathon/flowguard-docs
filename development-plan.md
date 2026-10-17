@@ -1,17 +1,17 @@
 # Plan de desarrollo de 15 días
 
-Este documento es la vista ejecutiva del plan de 15 días. El desglose operativo día a día, por responsable, con pruebas y riesgos, ya existe en [implementation-checklist.md](implementation-checklist.md) y en [architecture.md § Plan de trabajo de 15 días](architecture.md#plan-de-trabajo-de-15-días-resumen); este documento no lo duplica, sino que lo organiza en los cinco bloques solicitados por el equipo y enlaza el plan individual de cada developer.
+Este documento es la vista ejecutiva del plan de 15 días. El desglose operativo día a día, por responsable, con pruebas y riesgos, ya existe en [implementation-checklist.md](implementation-checklist.md) y en [architecture.md § Plan de trabajo de 15 días](architecture.md#plan-de-trabajo-de-15-días-resumen); este documento no lo duplica, sino que lo organiza en los cinco bloques solicitados por el equipo y enlaza el plan individual de cada puesto.
 
-El plan individual completo de cada integrante vive en `developers/developer-N/work-plan.md`.
+El plan individual completo de cada puesto vive en `developers/developer-N/work-plan.md` (`Dev N` = `Puesto N`; ver [README.md](README.md#distribución-del-equipo-cinco-puestos)). El calendario, los cinco bloques y los hitos no cambian con la reorganización del equipo en cinco puestos.
 
 ## Bloque 1 — Días 1–3: fundamentos, estructura y contratos
 
 | Campo | Contenido |
 |---|---|
 | Objetivo | Congelar los contratos compartidos (JSON/Zod) y el modelo de estados unificado; levantar la estructura de carpetas de cada repositorio; dejar el motor de reglas, el frontend y el adaptador de Nebius funcionando contra mocks |
-| Hitos | Contratos aprobados por los cuatro developers; migración inicial aplicada en Supabase de desarrollo; motor de reglas pasa los 10 casos obligatorios |
+| Hitos | Contratos aprobados por escrito por los cinco puestos; migración inicial aplicada en Supabase de desarrollo; motor de reglas pasa los 10 casos obligatorios |
 | Entregables | `payment.schema.ts`, `execution.schema.ts`, `engine.schema.ts`, `evidence-report.schema.ts`; `supabase/migrations/001_initial_schema.sql`; `evaluatePayment` con las cinco reglas; UI con datos mock; adaptador Nebius con respuesta mock; fixtures en `mocks/` |
-| Dependencias | Todo el equipo depende de que los contratos se cierren el día 1; Dev 2 y Dev 3 dependen de las fixtures de Dev 4 |
+| Dependencias | Todo el equipo depende de que los contratos se cierren el día 1; Dev 2 y Dev 3 dependen de las fixtures de Dev 5; Dev 1 valida los contratos `payment`, `execution` y `engine` que propone Dev 5 |
 | Criterio de aceptación | Ver fila por fila en [implementation-checklist.md § Bloque 1](implementation-checklist.md#bloque-1--días-13-congelación-de-contratos-y-estructura-del-proyecto) |
 | Estado | Pendiente |
 
@@ -43,7 +43,7 @@ El plan individual completo de cada integrante vive en `developers/developer-N/w
 |---|---|
 | Objetivo | Reforzar consistencia de datos, autorización e idempotencia bajo concurrencia; pulir estados de error en la UI; ajustar límites del agente a valores reales observados; ejecutar la regresión completa |
 | Hitos | MVP end-to-end estable incluso si Nebius falla |
-| Entregables | Pruebas de concurrencia de idempotencia; UI con estados de carga/error/detalle pulidos; `AGENT_MAX_TOOL_CALLS`/`AGENT_TIMEOUT_MS` calibrados; suite completa (`vitest` + `playwright`) ejecutada y defectos registrados |
+| Entregables | Pruebas de concurrencia de idempotencia; UI con estados de carga/error/detalle pulidos; `AGENT_MAX_TOOL_CALLS`/`AGENT_TIMEOUT_MS` calibrados; suite completa (`vitest` + `playwright`) ejecutada por los propietarios de cada módulo, con coordinación y registro de defectos transversales por Dev 5 |
 | Dependencias | Todo el bloque depende del hito del día 9 |
 | Criterio de aceptación | Hito obligatorio del día 12: se fuerza un fallo de Nebius en el ensayo y la decisión persistida no cambia — ver [implementation-checklist.md § Bloque 4](implementation-checklist.md#bloque-4--días-1012-resiliencia-y-manejo-de-fallos) |
 | Estado | Pendiente |
@@ -63,6 +63,6 @@ El plan individual completo de cada integrante vive en `developers/developer-N/w
 
 - Desglose día a día, responsable, prueba y riesgo de cada entregable: [implementation-checklist.md](implementation-checklist.md)
 - Resumen arquitectónico de los cinco bloques: [architecture.md § Plan de trabajo de 15 días](architecture.md#plan-de-trabajo-de-15-días-resumen)
-- Plan individual de cada developer: `developers/developer-1/work-plan.md`, `developers/developer-2/work-plan.md`, `developers/developer-3/work-plan.md`, `developers/developer-4/work-plan.md`
+- Plan individual de cada puesto: `developers/developer-1/work-plan.md`, `developers/developer-2/work-plan.md`, `developers/developer-3/work-plan.md`, `developers/developer-4/work-plan.md` (plan de CI/CD **propuesto, pendiente de aprobación**), `developers/developer-5/work-plan.md` (plan flexible, sin calendario fijo)
 - Criterios para considerar cerrado un bloque o una tarea: [definition-of-done.md](definition-of-done.md)
-- Cómo colaboran los cuatro developers entre bloques: [integration-and-dependencies.md](integration-and-dependencies.md)
+- Cómo colaboran los cinco puestos entre bloques: [integration-and-dependencies.md](integration-and-dependencies.md)
