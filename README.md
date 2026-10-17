@@ -26,8 +26,13 @@ La regla principal de diseño es innegociable: **el motor de reglas decide, el b
 
 ## Índice de documentos
 
+> **Identificadores en español (2026-10-17):** todos los nombres del sistema (API, base de datos, códigos de error, variables de entorno, código y documentos) pasan al español según [glosario.md](glosario.md). La migración se hace por repositorio; mientras tanto, si un documento usa un nombre en inglés, manda el glosario.
+
 | Documento | Contenido |
 |---|---|
+| [glosario.md](glosario.md) | Fuente única de nombres: endpoints, campos, tablas, estados, códigos de error, variables de entorno, archivos y código |
+| [convencion-commits.md](convencion-commits.md) | Formato de los mensajes de commit (`feat`, `fix`, `docs`…) en español |
+| [convencion-ramas.md](convencion-ramas.md) | Formato de los nombres de rama (`tipo/devN-descripcion`) y reglas de uso |
 | [architecture.md](architecture.md) | Decisiones arquitectónicas, stack, estructura del repositorio, flujo de datos, resiliencia y resumen del plan de 15 días |
 | [api-contracts.md](api-contracts.md) | Modelo de estados, contratos JSON por endpoint, idempotencia, conversión monetaria, formato de error |
 | [rules.md](rules.md) | Motor de reglas deterministas, las cinco reglas de negocio, casos de prueba obligatorios |
