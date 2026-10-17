@@ -1,32 +1,39 @@
-# Developer 4 — Contratos, mocks, pruebas e integración
+# Developer 4 (Puesto 4) — CI/CD
 
-Página de inicio del espacio de trabajo de Developer 4.
+Página de inicio del espacio de trabajo de Developer 4 (Puesto 4). La persona que ocupará este puesto aún no está asignada.
 
 ## Archivos de esta carpeta
 
-- [work-plan.md](work-plan.md) — plan completo de los 15 días
+- [work-plan.md](work-plan.md) — plan de CI/CD **propuesto, pendiente de aprobación**, y reasignación de las tareas del plan anterior
 - [daily-log.md](daily-log.md) — bitácora diaria
 - [notes.md](notes.md) — cuaderno técnico personal
 - [blockers.md](blockers.md) — bloqueos registrados
 
-## Módulo que posee
+## Qué posee este puesto
 
-Los contratos compartidos y la calidad del proyecto: los esquemas Zod, las fixtures de escenarios, las pruebas unitarias, de integración y end-to-end, la validación de compatibilidad entre módulos, la documentación de ejecución, el control de calidad y la preparación de la demo. Repositorios principales: [`flowguard-mocks`](https://github.com/FlowGuard-Hackathon/flowguard-mocks) y [`flowguard-tests`](https://github.com/FlowGuard-Hackathon/flowguard-tests).
+La integración continua y el despliegue continuo de FlowGuard: los workflows de GitHub Actions, las comprobaciones automatizadas de los repositorios y la documentación operativa de los pipelines. No hay workflows creados todavía en ninguno de los siete repositorios (verificado en `main`). El repositorio de trabajo se determina según la estructura real del proyecto; no se crea un repositorio nuevo ni se introduce una plataforma distinta de GitHub, que [architecture.md](../../architecture.md) ya fija para ramas, revisiones y CI.
 
 ## Responsabilidades
 
-- Proponer y cerrar los contratos compartidos (`payment.schema.ts`, `execution.schema.ts`, `engine.schema.ts`, `evidence-report.schema.ts`) con aprobación de Developer 1 y Developer 3.
-- Publicar y mantener las fixtures de escenarios en `mocks/`.
-- Construir y mantener la suite de pruebas unitarias, de integración y E2E en `flowguard-tests`.
-- Verificar los hitos obligatorios de cada bloque mediante ensayos internos.
-- Coordinar la regresión completa y el registro de defectos.
-- Preparar y ensayar el guion de demo final.
+- Configurar y mantener GitHub Actions.
+- Automatizar lint, comprobación de tipos, pruebas y build **cuando los scripts correspondientes existan**.
+- Automatizar la ejecución de las pruebas que mantienen los propietarios de cada módulo.
+- Detectar fallos de integración mediante los resultados de los pipelines y comunicarlos.
+- Mantener los workflows y documentar cómo se ejecutan y diagnostican.
+- Coordinar la automatización de despliegue únicamente conforme a la infraestructura ya acordada.
+- Ayudar a que la integración del repositorio final `flowguard` (`git subtree`) sea reproducible.
+- Aportar resultados reproducibles de CI como evidencia **complementaria** de los hitos de los días 6, 9, 12 y 15.
+
+## Qué NO es este puesto
+
+No es responsable funcional de QA, de los contratos, de los fixtures, de los módulos de aplicación ni de `flowguard-tests`. El propietario técnico corrige los defectos funcionales que el pipeline detecte. Las tareas del plan anterior de este puesto (contratos, fixtures, pruebas, QA, ensayos y revisiones) se reasignaron: ver la tabla en [work-plan.md](work-plan.md#tareas-del-plan-anterior-de-developer-4-y-su-nuevo-responsable).
 
 ## Cómo coordinarse con el resto del equipo
 
-- Coordinas la congelación de contratos el día 1: necesitas confirmación de Developer 1 y Developer 3 de que los contratos cubren lo que necesitan antes de cerrarlos.
-- Developer 2 depende de tus fixtures desde el día 1 para construir la UI sin esperar a la API real.
-- Verificas, junto con cada developer, que los hitos obligatorios de cada bloque (días 6, 9, 12 y 15) se cumplen con evidencia real, no solo con la anotación de "completado".
+- Con Developer 1: comprobaciones y despliegue del backend, y la integración técnica del backend en `flowguard`.
+- Con Developer 2: comprobaciones del frontend.
+- Con Developer 3: verificaciones del agente y su proveedor, sin exponer credenciales.
+- Con Developer 5: contratos y mocks necesarios para validar las integraciones.
 - Ver el detalle completo de dependencias en [integration-and-dependencies.md](../../integration-and-dependencies.md).
 
 ## Reglas de actualización y colaboración
@@ -39,4 +46,4 @@ Los contratos compartidos y la calidad del proyecto: los esquemas Zod, las fixtu
 6. Los archivos de esta carpeta pueden modificarse mediante Pull Requests pequeños.
 7. Los documentos generales de la raíz del repositorio son compartidos y no deben contradecir los contratos técnicos existentes.
 
-Estos archivos Markdown son compartidos: los cuatro integrantes pueden proponer cambios si tienen permisos de escritura en GitHub. La carpeta organiza el trabajo, no establece permisos privados.
+Estos archivos Markdown son compartidos: los cinco puestos pueden proponer cambios si tienen permisos de escritura en GitHub. La carpeta organiza el trabajo, no establece permisos privados.
