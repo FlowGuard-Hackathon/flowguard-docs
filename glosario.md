@@ -14,7 +14,7 @@ Convenciones relacionadas: [convencion-commits.md](convencion-commits.md) y [con
 | Motivo | Equipo hispanohablante; se decide antes de que exista código del backend o de la base de datos, cuando el costo del cambio es mínimo |
 | Contexto | Hasta esta fecha los contratos estaban congelados en inglés. Este cambio reemplaza esos nombres; **no** cambia la arquitectura, el stack, las reglas de negocio, el modelo de datos ni el comportamiento de ningún componente: solo los nombres |
 | Escalabilidad | Los textos visibles (mensajes al usuario y al modelo) se centralizan en catálogos de mensajes con claves estables (`mensajes/es.ts`); agregar otro idioma consiste en añadir otro catálogo, sin tocar la lógica |
-| Estado | **Migración en curso.** Los documentos y el código que aún usan nombres en inglés se renombran por repositorio, en el orden de la sección final |
+| Estado | **Migración en curso.** `flowguard-docs` ya está migrado (paso 2). El resto de repositorios se renombra en el orden de la sección final; hasta entonces su código y sus READMEs pueden seguir con nombres en inglés |
 
 ## Reglas de nomenclatura
 
@@ -323,12 +323,59 @@ Cualquier nombre nuevo que no esté en esta tabla se forma con las reglas de nom
 | `developers/developer-N/` | `desarrolladores/desarrollador-N/` |
 | `work-plan.md`, `daily-log.md`, `notes.md`, `blockers.md` | `plan-trabajo.md`, `bitacora.md`, `notas.md`, `bloqueos.md` |
 
+## Añadidos al migrar la documentación
+
+Nombres que aparecieron al renombrar `flowguard-docs` y no estaban en la primera versión de este glosario.
+
+### Archivos
+
+| Antes | Ahora |
+|---|---|
+| `mocks/payment-approved.json` | `mocks/pago-aprobado.json` |
+| `mocks/payment-blocked.json` | `mocks/pago-bloqueado.json` |
+| `mocks/investigation-failed.json` | `mocks/investigacion-fallida.json` |
+| `migrations/001_initial_schema.sql` | `migrations/001_esquema_inicial.sql` (la carpeta `migrations/` la exige la CLI de Supabase) |
+| `src/shared/money.ts` | `src/compartido/dinero.ts` |
+| `src/server/agent/mockProvider.ts`, `mockProvider.test.ts` | `src/servidor/agente/proveedorSimulado.ts`, `proveedorSimulado.test.ts` |
+| `src/server/agent/nebiusProvider.ts` | `src/servidor/agente/proveedorNebius.ts` |
+| `src/server/agent/validateReport.ts` | `src/servidor/agente/validarInforme.ts` |
+| `src/server/agent/types.ts`, `src/server/tools/types.ts` | `tipos.ts` en cada carpeta |
+| `src/server/tools/inMemoryDataSource.ts` | `src/servidor/herramientas/fuenteDatosEnMemoria.ts` |
+| `src/server/tools/simulatedData.ts` | `src/servidor/herramientas/datosSimulados.ts` |
+| `src/server/tools/tools.test.ts` | `src/servidor/herramientas/herramientas.test.ts` |
+| `tests/unit/`, `tests/integration/`, `tests/contract/` | `tests/unitarias/`, `tests/integracion/`, `tests/contrato/` |
+
+Se conservan como términos técnicos o prefijos de integración (`git subtree`): las carpetas `mocks/`, `tests/`, `docs/`, `supabase/`, `fixtures/` y `e2e/`, y los archivos `index.ts` y `prompt.ts`.
+
+### Campos, valores y nombres internos
+
+| Antes | Ahora |
+|---|---|
+| Parámetros de consulta `from` / `to` | `desde` / `hasta` |
+| `retry_after_seconds` | `reintentar_tras_segundos` |
+| `applied`, `propagated` (resultado de `fn_finalizar_intento_investigacion`) | `aplicado`, `propagado` |
+| `allowed` (resultado de `fn_verificar_limite_solicitudes`) | `permitido` |
+| `worker_id` | `proceso_id` |
+| `trusted_context` | `contexto_confiable` |
+| `violations` (entrada del agente) | `infracciones` |
+| `REQUEST_SUPERVISOR_APPROVAL` | `SOLICITAR_APROBACION_SUPERVISOR` |
+| `UNKNOWN` | `DESCONOCIDO` |
+| `CONFIGURED_MODEL` | `MODELO_CONFIGURADO` |
+| `current_count` | `conteo_actual` |
+| `RuleResult` | `ResultadoRegla` |
+| Índices `idx_<tabla>_<columnas>` | Mismo formato con los nombres nuevos, p. ej. `idx_ejecuciones_estado_investigacion` |
+| Variables TS de las reglas (`amountMinor`, `approvalThresholdMinor`, `validSupervisorApproval`, `allowedCategories`, `requesterId`, `approverId`…) | `montoCentavos`, `umbralAprobacionCentavos`, `aprobacionSupervisorValida`, `categoriasPermitidas`, `solicitanteId`, `aprobadorId`… |
+
+### No se traduce (formato de terceros)
+
+Los nombres que define una API externa se conservan tal cual, porque los fija el proveedor: por ejemplo los campos `messages`, `system` y `tools` del formato de chat compatible con OpenAI, la ruta `/chat/completions`, las cabeceras HTTP (`Authorization`, `Retry-After`, `X-Forwarded-For`) y el rol `service_role` de Supabase.
+
 ## Orden de la migración
 
 Cada paso es un PR independiente con commits `refactor(...)!` o `docs(...)!` según [convencion-commits.md](convencion-commits.md):
 
 1. `flowguard-docs`: este glosario y las convenciones (este PR).
-2. `flowguard-docs`: renombrado de documentos y de todos los identificadores dentro de ellos.
+2. `flowguard-docs`: renombrado de documentos y de todos los identificadores dentro de ellos. Las bitácoras (`bitacora.md`) **no** se traducen: son el registro histórico de lo que se hizo con los nombres de ese momento.
 3. `flowguard-supabase`: migración SQL con tablas, columnas, funciones y valores en español. **La verificación previa contra PostgreSQL real deja de aplicar** y debe repetirse antes de volver a marcarla como verificada.
 4. `flowguard-src`: carpetas, contratos Zod, agente, herramientas y catálogo `src/mensajes/es.ts`.
 5. `flowguard-app`: rutas de páginas y de la API.
