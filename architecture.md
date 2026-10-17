@@ -140,9 +140,12 @@ flowguard/
 | Dev 1 | `server/rules/`, `executions/`, `persistence/`, migraciones y API de entrada | Cliente Nebius y lógica interna del agente |
 | Dev 2 | `app/dashboard/`, `app/simulator/`, `app/evidence/` y componentes | Reglas de negocio del backend |
 | Dev 3 | `server/agent/`, `server/tools/` y adaptador Nebius | Decisión determinista y esquema de persistencia |
-| Dev 4 | `mocks/`, `tests/`, `docs/` y coordinación de contratos | No modifica módulos ajenos sin acuerdo con su responsable |
+| Dev 4 | Workflows de CI/CD (GitHub Actions) y su documentación operativa | No es propietario de código funcional, contratos, mocks ni pruebas: automatiza su ejecución |
+| Dev 5 | `mocks/`, documentación de contratos compartidos y coordinación de `tests/` (suite compartida) | No cambia contratos aprobados por su cuenta; no modifica módulos ajenos sin acuerdo con su responsable |
 
-`src/contracts/` es una zona compartida. Dev 4 coordina sus versiones, pero Dev 1 y Dev 3 deben aprobar los cambios que afecten sus interfaces.
+`src/contracts/` es una zona compartida. Dev 5 coordina sus versiones y propone `payment`, `execution` y `engine`, que Dev 1 valida; `evidence-report.schema.ts` es propiedad de Dev 3. Los cambios que afecten las interfaces de otro puesto deben ser aprobados por su responsable.
+
+> **Nota de reorganización:** la tabla anterior sustituye a la distribución de cuatro developers en la que `Dev 4` reunía contratos, mocks, pruebas y documentación. Esta nota es solo organizativa: no modifica ningún componente, contrato ni decisión técnica de este documento.
 
 ### Reglas de colaboración
 
@@ -361,7 +364,7 @@ La documentación previa establecía que la investigación "se programa después
 
 ## Plan de trabajo de 15 días (resumen)
 
-La planificación se divide en cinco bloques de tres días. Dev 4 coordina contratos, fixtures y pruebas desde el primer día para que los otros tres developers trabajen en paralelo.
+La planificación se divide en cinco bloques de tres días. Dev 5 coordina contratos y fixtures desde el primer día para que los demás puestos trabajen en paralelo, y cada propietario mantiene las pruebas de su módulo.
 
 | Bloque | Días | Foco | Hito obligatorio |
 |---|---|---|---|
@@ -397,7 +400,7 @@ El desglose día a día por developer — entregable concreto, dependencias, cri
 
 Para FlowGuard, la prioridad es conseguir aislamiento de fallos sin convertir un hackathon de 15 días en un proyecto de infraestructura.
 
-El frontend monolítico facilita el trabajo de Dev 2. Los módulos independientes permiten que Dev 1 y Dev 3 trabajen sin pisarse. Los contratos compartidos y las pruebas de Dev 4 reducen los problemas de integración. La separación de la decisión y la investigación garantiza que una caída de Nebius no autorice una operación incorrecta.
+El frontend monolítico facilita el trabajo de Dev 2. Los módulos independientes permiten que Dev 1 y Dev 3 trabajen sin pisarse. Los contratos compartidos que coordina Dev 5, las pruebas de cada propietario y la automatización de Dev 4 reducen los problemas de integración. La separación de la decisión y la investigación garantiza que una caída de Nebius no autorice una operación incorrecta.
 
 La regla principal de diseño es innegociable: **el motor de reglas decide, el backend persiste, la IA investiga y el frontend presenta.**
 
